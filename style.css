@@ -1,0 +1,65 @@
+div {
+    margin: 0px;
+    float: left;
+}
+
+p{
+    font-size: 18px;
+    font-family: "Arial", sans-serif;
+}
+
+img{
+    height: 100%;
+    width: 100%;
+}
+
+table{
+    margin: 0 auto;
+}
+
+.normalCell{
+    width: 70px;
+    height: 70px;
+}
+
+.smallCell{
+    width: 60px;
+    height: 60px;
+}
+
+#counter{
+margin-right: 30px;
+}
+
+#pointsCounter{
+margin-left: 30px;
+}
+
+#visibleTableContainer{
+    width: 100%;
+    height: 0px;
+}
+
+#counterContainer
+{
+    width: 49%;
+    height: 30px;
+    text-align: right;
+}
+
+#pointsContainer{
+    width: 49%;
+    height: 30px;
+    text-align: left;
+}
+
+#setupBox{
+    width: 98%;
+    height: 100%;
+    text-align: center;
+}
+
+#gameTableContainer{
+    visibility: hidden;
+    width: 100%;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Memory game</title>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+        <script type="text/javascript" src="Script.js"></script>
+    </head>
+<body>
+<div id="setupBox">
+<form name="setup">
+Choose board size
+<select name="boardSize" id="selectSize">
+    <option value="6">Very small</option>
+    <option value="10">Small</option>
+    <option value="15">Medium</option>
+    <option value="24">Large</option>
+    <option value="40">Huge</option>
+    </select></br>
+    <input type="button" onclick="gameSetup()" value="Start game" id="startButton"/>
+</form>
+</div>
+<div id="counterContainer">
+<p id="counter"></p>
+</div>
+<div id="pointsContainer">
+<p id="pointsCounter"></p>
+</div>
+<div id="visibleTableContainer"> <!--div for a table with green face-down tiles -->
+    </div>
+<div id="gameTableContainer">   <!--div for a table with randomly distributed pairs of pics -->
+    </div>
+</body>
+</html>

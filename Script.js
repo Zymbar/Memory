@@ -1,3 +1,10 @@
+/* This function creates dynamically two tables. The first table contains randomly distributed pairs of identical elements. It is
+hidden at the beginning and becomes displayed only after the game is completed.
+The second table is consisted of background tiles (green tiles), each of the tiles occupies one table cell.
+All tiles in this table have onclick function assigned - after a green tile is hit, it shows an image assigned to this cell
+from the first table. When two identical images are revealed, their visibility in the table is hidden
+After the game is completed, it reveales the placement of all tiles*/
+
 function gameSetup(){
   var numberOfPairs=document.setup.selectSize[document.setup.selectSize.selectedIndex].value; //number of pairs, which depends on the value chosen by a player
   var availableTiles=40;        //Number of pairs in the biggest available board
@@ -9,6 +16,8 @@ function gameSetup(){
   var totalOnclick=0;           //Counts total number of clicking on the tiles
   var totalPoints=0;            //Counts a number of pairs guessed so far
   var paddingValue="0px";      //A default value of spacing between the tiles
+
+
 
     switch(numberOfPairs){      //This switch sets the number of rows and columns in a table which will be created later on, 
       case "6":                 //as well as sets the spacing between the tiles (the bigger the board is, the beigger are the
@@ -81,10 +90,12 @@ function gameSetup(){
   }  
 
   document.getElementById("gameTableContainer").appendChild(tableOfTiles);  //We add a newly created table to a suitable div
-                                                                            
-  for (var picCounter=0;picCounter<numberOfPairs;picCounter++){  //This loop places randomly as many pairs of tiles as chosen by a player
-    var img=document.createElement("img");                       //two new (and the same) images are created, which will be later placed
-    img.src=pairsSelection[picCounter]+".jpg";                     //in two unoccupied places in a table
+  /*This loop places randomly as many pairs of tiles as chosen by a player two new (and the same) images are created,
+  which will be later placed in two unoccupied places in a table*/
+
+  for (var picCounter=0;picCounter<numberOfPairs;picCounter++){  
+    var img=document.createElement("img");                       
+    img.src=pairsSelection[picCounter]+".jpg";                   
     var img2=document.createElement("img");
     img2.src=pairsSelection[picCounter]+".jpg";
     
@@ -116,22 +127,7 @@ function gameSetup(){
 
     function onclickFunction(){              //This function will be called when a player clicks on a green tile and it shows
                                             //to the user a picture which is on the face-up side of this tile
-      if (clickTimes==0){                   //This condition means that in the current round no tile has been clicked so far
-        var thisid=this.parentNode.id;
-        idIndex="cell"+thisid;
-        var firstCell=document.getElementById(thisid);  //In this part we exchange a picture of the green background into a 
-        firstCell.removeChild(firstCell.childNodes[0]); //picture, which is a face-up side of a tile
-        var replacedImage=document.getElementById(idIndex).firstChild.cloneNode(true);
-        firstCell.appendChild(replacedImage);
-        var firstSrc=firstCell.firstChild.src; 
-        clickTimes++;                         //When the first tile is clicked, then the number of tiles clicked in this round, as
-        totalOnclick++;                       //well as the total number of clicks is increased by one
-        clickedPics=firstCell;                //We will need this reference in the next "if"
-        var counterRef=document.getElementById("counter")                     
-        var newCounter=document.createTextNode(" All clicks: "+totalOnclick);   //After the click, a new message with 
-        document.getElementById("counter").innerHTML="";                        //the number of clicks appears
-        document.getElementById("counter").appendChild(newCounter);
-        }
+      
 
       if (clickTimes==1){                   //This "if" is triggerred when we choose the second pic in a round
         var thisid1=this.parentNode.id;
@@ -149,8 +145,10 @@ function gameSetup(){
         document.getElementById("counter").innerHTML="";                      
         document.getElementById("counter").appendChild(newCounter);
       
-        setTimeout(function() {              //Since this is the second tile in a round which has been clicked, both revealed images
-                                             //must be turned face-down again after a certain period of time (1 sec in this case)
+      /*Since this is the second tile in a round which has been clicked, both revealed images must be turned face-down
+       again after a certain period of time (1 sec in this case)*/
+       
+        setTimeout(function() {              
           if (firstSrcAgain==secondSrc){     //If both revealed tiles have the same picture on them, then they are removed from
             secondCell.firstChild.style.visibility="hidden";   //the board (by setting their visibility)
             clickedPics.firstChild.style.visibility="hidden";
@@ -179,7 +177,23 @@ function gameSetup(){
             clickTimes=0;
             }
         }, 1000);
-     }  
+     } 
+ if (clickTimes==0){                   //This condition means that in the current round no tile has been clicked so far
+        var thisid=this.parentNode.id;
+        idIndex="cell"+thisid;
+        var firstCell=document.getElementById(thisid);  //In this part we exchange a picture of the green background into a 
+        firstCell.removeChild(firstCell.childNodes[0]); //picture, which is a face-up side of a tile
+        var replacedImage=document.getElementById(idIndex).firstChild.cloneNode(true);
+        firstCell.appendChild(replacedImage);
+        var firstSrc=firstCell.firstChild.src; 
+        clickTimes++;                         //When the first tile is clicked, then the number of tiles clicked in this round, as
+        totalOnclick++;                       //well as the total number of clicks is increased by one
+        clickedPics=firstCell;                //We will need this reference in the next "if"
+        var counterRef=document.getElementById("counter")                     
+        var newCounter=document.createTextNode(" All clicks: "+totalOnclick);   //After the click, a new message with 
+        document.getElementById("counter").innerHTML="";                        //the number of clicks appears
+        document.getElementById("counter").appendChild(newCounter);
+        }
   }  
 
   var visibleTable=document.createElement("table");     //we create a table which will be visible for a player
